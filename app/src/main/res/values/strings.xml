@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">EAD mobile app</string>
+    <string name="view_from_home">view from home</string>
+    <string name="area">Area</string>
+    <string name="user_from_home">User from home</string>
+
+
+
 </resources>

@@ -1,3 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- insert array of places -->
+    <string-array name="area">
+        <item>Area 1</item>
+        <item>Area 2</item>
+        <item>Area 3</item>
+        <item>Area 4</item>
+        <item>Area 5</item>
+    </string-array>
+
+    <!-- insert array of stations -->
+    <string-array name="stations">
+        <item>Select Station</item>
+        <item>Station 2</item>
+        <item>Station 3</item>
+        <item>Station 4</item>
+        <item>Station 5</item>
+        <item>Station 6</item>
+        <item>Station 7</item>
+        <item>Station 8</item>
+        <item>Station 9</item>
+        <item>Station 10</item>
+    </string-array>
 </resources>
