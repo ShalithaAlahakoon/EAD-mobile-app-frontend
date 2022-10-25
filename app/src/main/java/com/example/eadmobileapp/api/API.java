@@ -1,18 +1,22 @@
 package com.example.eadmobileapp.api;
 
-import retrofit2.http.FormUrlEncoded;
+
+import com.example.eadmobileapp.models.Station;
+
+import java.util.List;
+
+import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface API {
 
-
-
-//    get all areas
-//    @FormUrlEncoded
-//    @GET(GET_ALL_AREAS_URL)
-//    Call<Area> getAllAreas();
-
-
-
+    //stations
+    @GET("stations")
+    Call<List<Station>> getStations();
 
 }
+
+
+
+
+
