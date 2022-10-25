@@ -16,30 +16,40 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".user_from_home_stations_list"
-            android:exported="false"
-            android:label="@string/title_activity_user_from_home_stations_list"
-            android:theme="@style/Theme.EADMobileApp.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
-        <activity
             android:name=".MainActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".user_from_home_dashboard"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Register"
+            android:exported="false">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".user_from_home_stations_list"
+            android:exported="false"
+            android:label="@string/title_activity_user_from_home_stations_list"
+            android:theme="@style/Theme.EADMobileApp.NoActionBar">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".user_from_home_dashboard"
+            android:exported="false">
+
 
             <meta-data
                 android:name="android.app.lib_name"

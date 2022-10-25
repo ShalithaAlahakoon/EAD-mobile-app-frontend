@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".MainActivity3">
 
     <ScrollView
@@ -85,7 +86,6 @@
                     android:text="Finished"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textSize="20sp"
-                    app:backgroundTint="#FF4A3C"
                     app:cornerRadius="100dp" />
             </LinearLayout>
         </LinearLayout>

@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         register = findViewById(R.id.textView4);
-        login = findViewById(R.id.button3);
+        login = findViewById(R.id.login);
     }
 
     protected void onResume() {
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                Intent intent = new Intent(MainActivity.this, user_from_home_dashboard.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Logged in Successfully...!", Toast.LENGTH_LONG).show();
             }
