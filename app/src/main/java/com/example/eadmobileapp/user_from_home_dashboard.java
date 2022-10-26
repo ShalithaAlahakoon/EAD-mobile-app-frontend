@@ -77,13 +77,11 @@ public class user_from_home_dashboard extends AppCompatActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         //set text view
-
                         String selectedArea = parent.getItemAtPosition(position).toString();
                         //get station name list
                         String[] stationNames = new String[stationList[0].size()];
                         int j = 0;
                         for (int i = 0; i < stationList[0].size(); i++) {
-
                             if (stationList[0].get(i).getStationArea().equals(selectedArea)) {
                                 stationNames[j] = stationList[0].get(i).getStationName()  ;
                                 j++;
@@ -95,7 +93,6 @@ public class user_from_home_dashboard extends AppCompatActivity {
                             stationNames2[i] = stationNames[i];
                         }
 
-
                         //on btn_search click get selected station name and froward to next activity
                         btn_search.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -106,10 +103,7 @@ public class user_from_home_dashboard extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         });
-
-
                     }
-
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
                     }
@@ -121,15 +115,8 @@ public class user_from_home_dashboard extends AppCompatActivity {
             public void onFailure(Call<List<Station>> call, Throwable t) {
                 System.out.println("error = " + t.getMessage());
                 //print toast message
-
                 Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
-
-
             }
         });
-
-
     }
-
-    
 }

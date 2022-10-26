@@ -44,6 +44,9 @@ public class join_queue extends AppCompatActivity {
                 System.out.println(" selected area : "+selectArea+" station : "+selectStation+" fuel : "+selectFuel);
 
                 Intent intent = new Intent(view.getContext(), timer_screen.class);
+                intent.putExtra("area", selectArea);
+                intent.putExtra("station", selectStation);
+                intent.putExtra("fuel", selectFuel);
                 startActivity(intent);
 
             }

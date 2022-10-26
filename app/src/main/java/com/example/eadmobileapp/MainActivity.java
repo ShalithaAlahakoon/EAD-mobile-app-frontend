@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, user_from_home_dashboard.class);
+                Intent intent = new Intent(MainActivity.this, WelcomeScreen.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Logged in Successfully...!", Toast.LENGTH_LONG).show();
             }
