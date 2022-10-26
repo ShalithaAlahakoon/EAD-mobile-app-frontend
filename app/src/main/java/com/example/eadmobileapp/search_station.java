@@ -47,7 +47,6 @@ public class user_from_home_dashboard extends AppCompatActivity {
 
         //get station list
         Call<List<Station>> call = api.getStations();
-        System.out.println("call = " + call);
 
         call.enqueue(new Callback<List<Station>>() {
             @Override
