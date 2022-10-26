@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">EAD mobile app</string>
+
+
+    <string-array name="areas">
+        <item>All Cities</item>
+        <item>Yakkala</item>
+        <item>Akkaraipaththu</item>
+        <item>Batticloa</item>
+        <item>Colombo</item>
+        <item>Weligama</item>
+        <item>Kuliyapitiya</item>
+        <item>Twalantanne</item>
+        <item>Dankotuwa</item>
+        <item>Wellawaya</item>
+        <item>Sainthamaruthu</item>
+        <item>Kandy</item>
+        <item>Colombo 05</item>
+        <item>Kochchikade</item>
+        <item>Ambalangoda</item>
+        <item>Marawila</item>
+        <item>Yatawatta</item>
+        <item>Pannipitiya</item>
+        <item>Horana</item>
+        <item>Balangoda</item>
+        <item>Rathanapura</item>
+        <item>Bopitiya</item>
+    </string-array>
+
+    <string-array name="stations">
+        <item>A H M HUSSAIN HADJIAR SONS</item>
+        <item>A M D N ARTHANAYAKE</item>
+        <item>CADILLAC FILLING STATION (PVT) LTD</item>
+        <item>FELIX PEREIRA AND SONS</item>
+        <item>D I A JAYASINGHE</item>
+        <item>DHANUSHKA ENGG. PVT LTD</item>
+        <item>COLOMBO SOUTH MPCS LTD</item>
+        <item>DON SOMAPALA COMPANY PVT LTD</item>
+        <item>EHELIYAGODA MPCS LTD</item>
+        <item>H D WEERAKOON</item>
+        <item>ERANGA ENTERPRISES PVT LTD</item>
+        <item>HARSHA D WEERAKOON</item>
+        <item>INDIKA FILLING STATION</item>
+        <item>J H S ENTERPRISES PVT LTD</item>
+        <item>A H WIMALATUNGA &amp; SON (PVT) LTD</item>
+        <item>A J S JAYAKODY</item>
+        <item>A W RANASINGHE</item>
+    </string-array>
+
+    <string-array name="fuel_type">
+        <item>95 Oct</item>
+        <item>92 Oct</item>
+        <item>Super Diesel</item>
+        <item>Normal Diesel</item>
+        <item>Kerosene Oil</item>
+    </string-array>
+</resources>
