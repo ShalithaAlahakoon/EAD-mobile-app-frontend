@@ -38,16 +38,13 @@ public class user_from_home_stations_list extends AppCompatActivity {
 
         //get station list
         call = api.getStations();
-        System.out.println("call = " + call);
         //set station list
         call.enqueue(new retrofit2.Callback<List<Station>>() {
             @Override
             public void onResponse(Call<List<Station>> call, retrofit2.Response<List<Station>> response) {
                 stationList = (ArrayList<Station>) response.body();
-                System.out.println("Fuel type = " + stationList.get(0).getFuelTypes().get(0).fuelType);
                 setStationInfo();
                 setAdapter();
-
             }
 
             @Override
@@ -75,7 +72,6 @@ public class user_from_home_stations_list extends AppCompatActivity {
 //        loop through the array and add to the list
         for (int i = 0; i < selectedStations.length; i++) {
             Station station = getStationInfo(selectedStations[i]);
-            System.out.println("selected station = " + station.getFuelTypes().get(0).availability);
             if(station != null) {
                 temp.add(new Station(station.getStationName(), station.getStationAddress(), station.getStationArea(),station.getOwner(),station.isOpenClose(),station.getFuelTypes()));
             }else{
@@ -90,7 +86,6 @@ public class user_from_home_stations_list extends AppCompatActivity {
 
     private Station getStationInfo(String s) {
         if (stationList != null) {
-            System.out.println("stationList = " + stationList.get(0));
             for (int i = 0; i < stationList.size(); i++) {
                 if (stationList.get(i).getStationName().equals(s)) {
                     return stationList.get(i);

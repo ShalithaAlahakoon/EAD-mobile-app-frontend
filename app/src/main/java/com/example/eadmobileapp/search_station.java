@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.eadmobileapp.api.API;
@@ -22,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class user_from_home_dashboard extends AppCompatActivity {
+public class search_station extends AppCompatActivity {
 
 
     private Spinner spinner_area ,spinner_station;
@@ -66,7 +65,7 @@ public class user_from_home_dashboard extends AppCompatActivity {
                 }
 
                 //convert array to array adapter
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(user_from_home_dashboard.this, android.R.layout.simple_spinner_item, stationAreas);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(search_station.this, android.R.layout.simple_spinner_item, stationAreas);
                 //convert array adapter to array
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner_area.setAdapter(adapter);
@@ -100,7 +99,7 @@ public class user_from_home_dashboard extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 //forward to next activity
-                                Intent intent = new Intent(user_from_home_dashboard.this, user_from_home_stations_list.class);
+                                Intent intent = new Intent(search_station.this, user_from_home_stations_list.class);
                                 intent.putExtra("selectedStation",stationNames2);
                                 startActivity(intent);
                             }

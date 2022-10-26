@@ -28,9 +28,23 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Register"
+            android:name=".user_dashboard"
             android:exported="false">
 
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".owner_dashboard"
+            android:exported="false"> <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".Register"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -40,17 +54,22 @@
             android:exported="false"
             android:label="@string/title_activity_user_from_home_stations_list"
             android:theme="@style/Theme.EADMobileApp.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".search_station"
+            android:exported="false">
+
 
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
-            android:name=".user_from_home_dashboard"
+            android:name=".AddStation"
             android:exported="false">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
