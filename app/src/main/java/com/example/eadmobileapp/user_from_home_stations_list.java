@@ -35,7 +35,6 @@ public class user_from_home_stations_list extends AppCompatActivity {
         API api = RetrofitClient.getInstance().getApi();
         //station list
 
-
         //get station list
         call = api.getStations();
         //set station list
@@ -57,7 +56,6 @@ public class user_from_home_stations_list extends AppCompatActivity {
 
     private void setAdapter() {
         recyclerAdapter adapter = new recyclerAdapter(stationList);
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
