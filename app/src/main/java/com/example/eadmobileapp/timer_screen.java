@@ -39,11 +39,18 @@ public class timer_screen extends AppCompatActivity {
     Chronometer timers;
     boolean isRunning = false;
 
+    String area, station, fuel;
+
     long saveTime ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer_screen);
+
+        Intent intent = getIntent();
+        area = intent.getStringExtra("area");
+        station = intent.getStringExtra("station");
+        fuel = intent.getStringExtra("fuel");
 
         fuelAfter = findViewById(R.id.btnAfter);
         fuelBefore = findViewById(R.id.btnBefore);
@@ -53,7 +60,6 @@ public class timer_screen extends AppCompatActivity {
             isRunning = true;
             timers.start();
         }
-
 
         fuelBefore.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -73,7 +79,7 @@ public class timer_screen extends AppCompatActivity {
                 long MM = (seconds % 3600) / 60;
                 long SS = seconds % 60;
                 String timeElapsed = String.format("%02d:%02d:%02d", HH, MM, SS);
-                getDataSave(currentDate+" "+currentTime,timeElapsed+"",false);
+                getDataSave(area, station, fuel,currentDate+" "+currentTime,timeElapsed+"",false);
             }
         });
 
@@ -94,20 +100,24 @@ public class timer_screen extends AppCompatActivity {
                 long MM = (seconds % 3600) / 60;
                 long SS = seconds % 60;
                 String timeElapsed = String.format("%02d:%02d:%02d", HH, MM, SS);
-                getDataSave(currentDate+" "+currentTime,timeElapsed+"",true);
+                getDataSave(area, station, fuel,currentDate+" "+currentTime,timeElapsed+"",true);
             }
         });
 
     }
 
-    public void getDataSave(String arrvie, String duration, Boolean fuelSt){
+    public void getDataSave(String area, String station, String fuel, String arrvie, String duration, Boolean fuelSt){
         try{
             RequestQueue queue = Volley.newRequestQueue(this);
             String URL = "http://192.168.42.1:3000/filling/add";
             JSONObject jsonObject = new JSONObject();
+            jsonObject.put("area",area);
+            jsonObject.put("station",station);
+            jsonObject.put("fuel",fuel);
             jsonObject.put("arrivel",arrvie);
             jsonObject.put("fillSt",fuelSt);
             jsonObject.put("wating",duration);
+
 
             final String reqString = jsonObject.toString();
             Log.i("reqL", reqString);
