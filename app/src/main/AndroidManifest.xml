@@ -15,19 +15,31 @@
         android:theme="@style/Theme.EADMobileApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity
+            android:name=".WelcomeScreen"
+            android:exported="false" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".Register"
             android:exported="false">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -37,34 +49,22 @@
             android:exported="false"
             android:label="@string/title_activity_user_from_home_stations_list"
             android:theme="@style/Theme.EADMobileApp.NoActionBar">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".user_from_home_dashboard"
             android:exported="false">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-        <activity android:name=".join_queue"
+        <activity
+            android:name=".join_queue"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-
-        <activity android:name=".timer_screen">
-
-        </activity>
-
+        <activity android:name=".timer_screen"></activity>
     </application>
 
 </manifest>
