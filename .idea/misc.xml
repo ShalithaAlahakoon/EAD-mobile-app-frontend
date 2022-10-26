@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Downloads/EAD-mobile-app-frontend/EAD-mobile-app-frontend/EAD-mobile-app-frontend-main/app/src/main/res/layout/activity_add_station.xml" value="0.19010416666666666" />
+        <entry key="..\:/Downloads/EAD-mobile-app-frontend/EAD-mobile-app-frontend/EAD-mobile-app-frontend-main/app/src/main/res/layout/activity_join_queue.xml" value="0.25" />
+        <entry key="..\:/Downloads/EAD-mobile-app-frontend/EAD-mobile-app-frontend/EAD-mobile-app-frontend-main/app/src/main/res/layout/activity_main.xml" value="0.19010416666666666" />
+        <entry key="..\:/Downloads/EAD-mobile-app-frontend/EAD-mobile-app-frontend/EAD-mobile-app-frontend-main/app/src/main/res/layout/activity_main2.xml" value="0.19010416666666666" />
+        <entry key="..\:/Downloads/EAD-mobile-app-frontend/EAD-mobile-app-frontend/EAD-mobile-app-frontend-main/app/src/main/res/layout/activity_register.xml" value="0.19010416666666666" />
+        <entry key="..\:/Downloads/EAD-mobile-app-frontend/EAD-mobile-app-frontend/EAD-mobile-app-frontend-main/app/src/main/res/layout/activity_timer_screen.xml" value="0.19010416666666666" />
+        <entry key="..\:/Downloads/EAD-mobile-app-frontend/EAD-mobile-app-frontend/EAD-mobile-app-frontend-main/app/src/main/res/layout/activity_user_from_home_dashboard.xml" value="0.19010416666666666" />
+        <entry key="..\:/Downloads/EAD-mobile-app-frontend/EAD-mobile-app-frontend/EAD-mobile-app-frontend-main/app/src/main/res/layout/activity_user_from_home_stations_list.xml" value="0.19010416666666666" />
+        <entry key="..\:/Downloads/EAD-mobile-app-frontend/EAD-mobile-app-frontend/EAD-mobile-app-frontend-main/app/src/main/res/layout/item_file.xml" value="0.19010416666666666" />
+        <entry key="..\:/Downloads/EAD-mobile-app-frontend/EAD-mobile-app-frontend/EAD-mobile-app-frontend-main/app/src/main/res/layout/list_item.xml" value="0.19010416666666666" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

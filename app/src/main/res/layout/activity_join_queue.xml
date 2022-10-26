@@ -87,7 +87,7 @@
                             android:layout_width="300dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
-                            android:entries="@array/areas" />
+                            android:entries="@array/area" />
                     </LinearLayout>
                 </LinearLayout>
 
