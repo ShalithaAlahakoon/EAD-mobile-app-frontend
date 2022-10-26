@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- insert array of places -->
+    <string-array name="area">
+        <item>No data found</item>
+    </string-array>
+</resources>
