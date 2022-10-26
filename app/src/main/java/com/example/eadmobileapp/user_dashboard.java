@@ -24,5 +24,10 @@ public class user_dashboard extends AppCompatActivity {
             Intent intent = new Intent(user_dashboard.this, search_station.class);
             startActivity(intent);
         });
+
+        go_to_queue.setOnClickListener(v -> {
+            Intent intent = new Intent(user_dashboard.this, join_queue.class);
+            startActivity(intent);
+        });
     }
 }
