@@ -28,7 +28,7 @@ public class WelcomeScreen extends AppCompatActivity {
         btnStation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WelcomeScreen.this, user_from_home_dashboard.class);
+                Intent intent = new Intent(WelcomeScreen.this, owner_dashboard.class);
                 startActivity(intent);
             }
         });

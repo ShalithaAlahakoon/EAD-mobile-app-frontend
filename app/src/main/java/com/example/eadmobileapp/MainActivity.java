@@ -53,11 +53,6 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("user name = " + response.body().get(0).getUsername());
                 userList[0] = response.body();
 
-
-
-
-
-
                 login.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -90,9 +85,6 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                     }
-
-
-
 
 //                        Intent intent = new Intent(MainActivity.this, search_station.class);
 //                        startActivity(intent);
