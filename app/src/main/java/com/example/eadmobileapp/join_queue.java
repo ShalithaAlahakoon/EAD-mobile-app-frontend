@@ -104,7 +104,7 @@ public class join_queue extends AppCompatActivity {
                         }
 
                         //get station name list
-                        String[] stationNames = new String[stationList[0].size()];
+                        String[] stationNames = new String[stationList[0].size()+1];
                         stationNames[0] = "Select Station";
                         int j = 1;
                         for (int i = 0; i < stationList[0].size(); i++) {
@@ -146,7 +146,7 @@ public class join_queue extends AppCompatActivity {
 
 
                                     //get station name list
-                                    String[] fuelNames = new String[stationList[0].size()];
+                                    String[] fuelNames = new String[stationList[0].size()+1];
 
                                     fuelNames[0] = "Select Fuel";
 
@@ -164,9 +164,11 @@ public class join_queue extends AppCompatActivity {
                                     }
                                     //remove null values from array
                                     String[] fuelNames2 = new String[j];
-                                    for (int i = 0; i < j; i++) {
-                                        fuelNames2[i] = fuelNames[i];
-                                    }
+
+                                        for (int i = 0; i < j; i++) {
+                                            fuelNames2[i] = fuelNames[i];
+                                        }
+
 
                                     if (fuelNames2.length != 0) {
                                         //convert array to array adapter
@@ -227,9 +229,7 @@ public class join_queue extends AppCompatActivity {
                     intent.putExtra("fuel", selectFuel);
                     startActivity(intent);
                 }
-
             }
         });
     }
-
 }
