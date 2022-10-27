@@ -86,6 +86,13 @@
             android:exported="false">
         </activity>
         <activity android:name=".timer_screen"></activity>
+        <activity
+            android:name=".MainActivity3"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
     </application>
 
 </manifest>
