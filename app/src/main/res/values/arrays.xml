@@ -2,20 +2,14 @@
 <resources>
     <!-- insert array of places -->
     <string-array name="area">
-        <item>Rathnapura</item>
-        <item>Gampaha</item>
-        <item>Makola</item>
+        <item>Select Area</item>
     </string-array>
 
     <string-array name="stations">
-        <item>Rathnapura fillings</item>
-        <item>gampaha fillings station</item>
-        <item>fuel max</item>
+        <item>Select Station</item>
     </string-array>
 
     <string-array name="fuel_type">
-        <item>Diesel</item>
-        <item>92 octane</item>
-        <item>95 octane</item>
+        <item>Select Fuel</item>
     </string-array>
 </resources>

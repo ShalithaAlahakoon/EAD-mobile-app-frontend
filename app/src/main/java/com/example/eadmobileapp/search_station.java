@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,10 +48,12 @@ public class search_station extends AppCompatActivity {
         //get station list
         Call<List<Station>> call = api.getStations();
 
+
         call.enqueue(new Callback<List<Station>>() {
             @Override
             public void onResponse(Call<List<Station>> call, Response<List<Station>> response) {
                 stationList[0] = response.body();
+
 
                 //get station list length
                 int length = (int)stationList[0].size();
@@ -62,6 +65,8 @@ public class search_station extends AppCompatActivity {
 
                 for (int i = 1; i < length ; i++) {
                     stationAreas[i] = stationList[0].get(i-1).getStationArea();
+
+                    Log.i("st", stationList[0].get(i-1).getStationArea());
                 }
 
                 //convert array to array adapter
