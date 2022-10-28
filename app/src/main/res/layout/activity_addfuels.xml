@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".MainActivity2">
+    tools:context=".AddFuels">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Add Stations"
+                    android:text="Add Fuels"
                     android:textColor="#000000"
                     android:textSize="36sp" />
             </LinearLayout>
@@ -48,60 +48,28 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editTextTextPersonName"
+                <Spinner
+                    android:id="@+id/spinner_station"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_height="50dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
-                    android:ems="10"
-                    android:hint="Station Name"
-                    android:inputType="textPersonName"
-                    android:textSize="20sp" />
+                    android:background="#E6E6E6"
+                    android:entries="@array/stations"
+                    android:spinnerMode="dropdown" />
 
-                <EditText
+                <Spinner
+                    android:id="@+id/spinner_fuel_type"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_height="50dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginRight="20dp"
-                    android:ems="10"
-                    android:hint="Fuel Type"
-                    android:inputType="textPersonName"
-                    android:textSize="20sp" />
+                    android:background="#E6E6E6"
+                    android:entries="@array/fuel_type"
+                    android:spinnerMode="dropdown" />
 
-                <EditText
-                    android:id="@+id/editTextTextPersonName4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:ems="10"
-                    android:hint="Arrival Time"
-                    android:inputType="textPersonName"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/editTextTextPersonName5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:ems="10"
-                    android:hint="Litres"
-                    android:inputType="textPersonName"
-                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,10 +80,10 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/updateBtn"
                     android:layout_width="300dp"
                     android:layout_height="60dp"
-                    android:text="Add Now"
+                    android:text="Next"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textSize="20sp"
                     app:cornerRadius="100dp"

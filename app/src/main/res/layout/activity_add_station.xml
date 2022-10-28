@@ -50,7 +50,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName10"
+                    android:id="@+id/stName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -62,7 +62,19 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName11"
+                    android:id="@+id/stDistrict"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:ems="10"
+                    android:hint="District"
+                    android:inputType="textPersonName"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/stAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -74,16 +86,17 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName12"
+                    android:id="@+id/stOwner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="20dp"
                     android:ems="10"
-                    android:hint="Station Code"
+                    android:hint="Owner Name"
                     android:inputType="textPersonName"
                     android:textSize="20sp" />
+
             </LinearLayout>
 
             <LinearLayout

@@ -3,7 +3,6 @@ package com.example.eadmobileapp.models;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Station {
 
@@ -12,12 +11,12 @@ public class Station {
     @SerializedName("fuelTypes")
     private ArrayList<fuelType> fuelTypes = null ;
 
-    public Station(String _id, String stationName, String stationArea, String stationAddress, String owner, boolean openClose) {
+    public Station(String _id, String stationName, String stationArea, String owner) {
         this._id = _id;
         this.stationName = stationName;
         this.stationArea = stationArea;
         this.stationAddress = stationAddress;
-        this.owner = owner;
+        this.owner = this.owner;
         this.openClose = openClose;
     }
 

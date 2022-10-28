@@ -2,7 +2,6 @@ package com.example.eadmobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,9 +12,7 @@ import android.widget.Toast;
 
 import com.example.eadmobileapp.api.API;
 import com.example.eadmobileapp.api.RetrofitClient;
-import com.example.eadmobileapp.models.Station;
 import com.example.eadmobileapp.models.User;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
@@ -24,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     TextView register;
     Button login;
     EditText txt_username, txt_password;
@@ -33,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         register = findViewById(R.id.textView4);
         login = findViewById(R.id.login);
@@ -66,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
                                 isSuccessful = true;
                                 //if user type is owner
                                 if (userList[0].get(i).getType().equals("owner")) {
-                                    Intent intent = new Intent(MainActivity.this, owner_dashboard.class);
+                                    Intent intent = new Intent(Login.this, owner_dashboard.class);
                                     startActivity(intent);
                                 }else{
-                                    Intent intent = new Intent(MainActivity.this, user_dashboard.class);
+                                    Intent intent = new Intent(Login.this, user_dashboard.class);
                                     startActivity(intent);
                                 }
 
@@ -78,10 +75,10 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         if (isSuccessful == false) {
-                            Toast.makeText(MainActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
                         }else
                         {
-                            Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -96,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -110,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Register.class);
+                Intent intent = new Intent(Login.this, AddFuels.class);
                 startActivity(intent);
             }
         });
