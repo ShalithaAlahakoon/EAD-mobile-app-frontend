@@ -23,10 +23,10 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        signUp = findViewById(R.id.button4);
+        signUp = findViewById(R.id.btn_signup);
         logIn = findViewById(R.id.log);
 
-        spinner2=findViewById(R.id.spinner2);
+        spinner2=findViewById(R.id.spinner_user_type);
 
         ArrayAdapter<String> adapter2=new ArrayAdapter<String>(Register.this, R.layout.item_file,user);
         adapter2.setDropDownViewResource(R.layout.item_file);
@@ -52,7 +52,7 @@ public class Register extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Register.this, MainActivity.class);
+                Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
             }
         });
@@ -60,7 +60,7 @@ public class Register extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Register.this, MainActivity3.class);
+                Intent intent = new Intent(Register.this, UpdateFuels.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "Registered Successfully...!", Toast.LENGTH_LONG).show();
             }
