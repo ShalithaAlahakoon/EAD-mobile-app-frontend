@@ -27,6 +27,9 @@ public interface API {
 
     @POST("users")
     Call<User> createUser(@Body User user);
+    
+    @POST("stations")
+    Call<Station> createStation(@Body Station station);
 
 }
 
