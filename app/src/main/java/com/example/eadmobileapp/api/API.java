@@ -25,6 +25,9 @@ public interface API {
     @GET("queues/{station}")
     Call <List<Queue>> getQueue(@Path("station") String station);
 
+    @POST("users")
+    Call<User> createUser(@Body User user);
+    
     @POST("stations")
     Call<Station> createStation(@Body Station station);
 

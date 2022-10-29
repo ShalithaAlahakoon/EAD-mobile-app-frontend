@@ -57,35 +57,44 @@ public class Login extends AppCompatActivity {
                         System.out.println("username = " + username);
                         String password = txt_password.getText().toString();
                         System.out.println("password = " + password);
-                        boolean isSuccessful = false;
+                        //check if username and password is empty
+                        if (username.isEmpty() || password.isEmpty()) {
+                            Toast.makeText(MainActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
+                        }
+
+                         boolean isSuccessful = true;
+                        int count = 0;
                         for (int i = 0; i < userList[0].size(); i++) {
                             if (username.equals(userList[0].get(i).getUsername()) && password.equals(userList[0].get(i).getPassword())) {
-                                isSuccessful = true;
+
                                 //if user type is owner
-                                if (userList[0].get(i).getType().equals("owner")) {
+                                if (userList[0].get(i).getType().equals("Station Owner")) {
                                     Intent intent = new Intent(Login.this, owner_dashboard.class);
+                                    //set owner details as extras
+                                    intent.putExtra("owner_name", userList[0].get(i).getUsername());
+                                    System.out.println("owner name = " + userList[0].get(i).getUsername());
                                     startActivity(intent);
-                                }else{
+                                }
+                                else if (userList[0].get(i).getType().equals("Customer")) {
                                     Intent intent = new Intent(Login.this, user_dashboard.class);
                                     startActivity(intent);
                                 }
 
-                            } else {
-                                isSuccessful = false;
+                            }
+                            else {
+                                count++;
                             }
                         }
-                        if (isSuccessful == false) {
+
+                        if(count == userList[0].size()){
                             Toast.makeText(Login.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-                        }else
-                        {
+                        }
+                        else{
                             Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         }
 
-                    }
 
-//                        Intent intent = new Intent(MainActivity.this, search_station.class);
-//                        startActivity(intent);
-//                        Toast.makeText(getApplicationContext(), "Logged in Successfully...!", Toast.LENGTH_LONG).show();
+                    }
 //                    }
                 });
 

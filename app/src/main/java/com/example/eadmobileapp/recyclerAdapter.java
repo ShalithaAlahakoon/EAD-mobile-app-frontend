@@ -112,10 +112,10 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
 //                            holder.txt_95octane_queue.setText(String.valueOf(queue.get(0).getOctane95Queue()));
 //                            holder.txt_diesel_queue.setText(String.valueOf(queue.get(0).getDieselQueue()));
 //                            holder.txt_superdiesel_queue.setText(String.valueOf(queue.get(0).getSuperDieselQueue()));
-                            holder.txt_92octane_queue.setText(String.valueOf(12));
-                            holder.txt_95octane_queue.setText(String.valueOf(32));
-                            holder.txt_diesel_queue.setText(String.valueOf(1));
-                            holder.txt_superdiesel_queue.setText(String.valueOf(5));
+                            holder.txt_92octane_queue.setText(String.valueOf(5));
+                            holder.txt_95octane_queue.setText(String.valueOf(0));
+                            holder.txt_diesel_queue.setText(String.valueOf(0));
+                            holder.txt_superdiesel_queue.setText(String.valueOf(0));
                         }
                 }
             }
