@@ -23,6 +23,9 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.eadmobileapp.api.API;
+import com.example.eadmobileapp.api.RetrofitClient;
+import com.example.eadmobileapp.models.Queue;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +36,9 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class timer_screen extends AppCompatActivity {
 
     Button fuelBefore, fuelAfter;
@@ -40,6 +46,9 @@ public class timer_screen extends AppCompatActivity {
     boolean isRunning = false;
 
     String area, station, fuel;
+
+    //API interface
+    API api = RetrofitClient.getInstance().getApi();
 
     long saveTime ;
     @Override
@@ -80,6 +89,13 @@ public class timer_screen extends AppCompatActivity {
                 long SS = seconds % 60;
                 String timeElapsed = String.format("%02d:%02d:%02d", HH, MM, SS);
                 getDataSave(area, station, fuel,currentDate+" "+currentTime,timeElapsed+"",false);
+
+                Toast toast = Toast.makeText(getApplicationContext(), "You are exited before pump fuel", Toast.LENGTH_SHORT);
+                toast.show();
+                //navigate back to user dashboard
+                Intent intent = new Intent(timer_screen.this, user_dashboard.class);
+                startActivity(intent);
+
             }
         });
 
@@ -101,6 +117,15 @@ public class timer_screen extends AppCompatActivity {
                 long SS = seconds % 60;
                 String timeElapsed = String.format("%02d:%02d:%02d", HH, MM, SS);
                 getDataSave(area, station, fuel,currentDate+" "+currentTime,timeElapsed+"",true);
+
+
+
+                Toast toast = Toast.makeText(getApplicationContext(), "You are exited after pump fuel", Toast.LENGTH_SHORT);
+                toast.show();
+                //navigate back to user dashboard
+                Intent intent = new Intent(timer_screen.this, user_dashboard.class);
+                startActivity(intent);
+
             }
         });
 
@@ -117,6 +142,20 @@ public class timer_screen extends AppCompatActivity {
             jsonObject.put("arrivel",arrvie);
             jsonObject.put("fillSt",fuelSt);
             jsonObject.put("wating",duration);
+
+            //reduce count of queue
+            Call queueExit = api.exit(new Queue(station,fuel,null));
+            queueExit.enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, retrofit2.Response response) {
+                    System.out.println("response = " + response.body());
+                }
+
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    System.out.println("error = " + t.getMessage());
+                }
+            });
 
 
             final String reqString = jsonObject.toString();

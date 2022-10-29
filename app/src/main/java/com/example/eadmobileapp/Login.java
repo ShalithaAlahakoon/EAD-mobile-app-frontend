@@ -59,7 +59,7 @@ public class Login extends AppCompatActivity {
                         System.out.println("password = " + password);
                         //check if username and password is empty
                         if (username.isEmpty() || password.isEmpty()) {
-                            Toast.makeText(MainActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
                         }
 
                          boolean isSuccessful = true;

@@ -73,7 +73,7 @@ public class Register extends AppCompatActivity {
                                 public void onResponse(Call<User> call, Response<User> response) {
                                     if (response.isSuccessful()) {
                                         Toast.makeText(Register.this, "User created successfully", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(Register.this, MainActivity.class);
+                                        Intent intent = new Intent(Register.this, Login.class);
                                         startActivity(intent);
                                     } else {
                                         Toast.makeText(Register.this, "User creation failed", Toast.LENGTH_SHORT).show();

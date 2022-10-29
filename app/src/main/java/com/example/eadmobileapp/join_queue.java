@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.eadmobileapp.api.API;
 import com.example.eadmobileapp.api.RetrofitClient;
+import com.example.eadmobileapp.models.Queue;
 import com.example.eadmobileapp.models.Station;
 import com.google.gson.Gson;
 
@@ -43,6 +44,8 @@ public class join_queue extends AppCompatActivity {
     private String url = "http://192.168.42.1:3000/stations";
     private JSONArray jsonArray;
 
+    //API interface
+    API api = RetrofitClient.getInstance().getApi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,6 +225,23 @@ public class join_queue extends AppCompatActivity {
                 if (selectArea == "Select Area" || selectStation == "Select Station" || selectFuel == "Select Fuel") {
                     Toast.makeText(join_queue.this, "Please Select Values", Toast.LENGTH_SHORT).show();
                 } else {
+                    Call queue = api.arrived(new Queue( selectStation, selectFuel ,null));
+
+                    queue.enqueue(new Callback() {
+                        @Override
+                        public void onResponse(Call call, Response response) {
+                            System.out.println("response = " + response.body());
+                            Toast.makeText(join_queue.this, "You have arrived to the queue", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call call, Throwable t) {
+                            System.out.println("error = " + t.getMessage());
+                            Toast.makeText(join_queue.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+//                    final String reqString = queue.toString();
+//                    Log.i("Queue", reqString);
 
                     Intent intent = new Intent(view.getContext(), timer_screen.class);
                     intent.putExtra("area", selectArea);

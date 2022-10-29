@@ -32,7 +32,6 @@ public class user_from_home_stations_list extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view_2);
         //API interface
         API api = RetrofitClient.getInstance().getApi();
-        //station list
 
         //get station list
         call = api.getStations();

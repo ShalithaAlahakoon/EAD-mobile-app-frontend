@@ -31,6 +31,18 @@ public interface API {
     @POST("stations")
     Call<Station> createStation(@Body Station station);
 
+    @GET("queues")
+    Call<List<Queue>> getQueues();
+
+    @POST("queues/arrived")
+    Call<Queue> arrived(@Body Queue queue);
+
+    @POST("queues/exit")
+    Call<Queue> exit(@Body Queue queue);
+
+    @POST("queues/name")
+    Call<Queue> getQueueByStationName(@Body Queue queue);
+
 }
 
 

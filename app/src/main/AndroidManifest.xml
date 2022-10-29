@@ -28,7 +28,7 @@
             android:required="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="true" >
             <meta-data
                 android:name="android.app.lib_name"
@@ -90,7 +90,7 @@
         </activity>
         <activity android:name=".timer_screen" />
         <activity
-            android:name=".MainActivity3"
+            android:name=".AddFuels"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
