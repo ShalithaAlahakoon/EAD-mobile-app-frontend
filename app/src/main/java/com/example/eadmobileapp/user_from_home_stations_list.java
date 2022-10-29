@@ -6,7 +6,6 @@ import android.widget.Toast;
 import com.example.eadmobileapp.api.API;
 import com.example.eadmobileapp.api.RetrofitClient;
 import com.example.eadmobileapp.models.Station;
-import com.example.eadmobileapp.models.User;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -30,7 +29,7 @@ public class user_from_home_stations_list extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_from_home_stations_list);
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view_2);
         //API interface
         API api = RetrofitClient.getInstance().getApi();
         //station list

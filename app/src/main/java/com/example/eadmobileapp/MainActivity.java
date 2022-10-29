@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
                                 //if user type is owner
                                 if (userList[0].get(i).getType().equals("Station Owner")) {
                                     Intent intent = new Intent(MainActivity.this, owner_dashboard.class);
+                                    //set owner details as extras
+                                    intent.putExtra("owner_name", userList[0].get(i).getUsername());
+                                    System.out.println("owner name = " + userList[0].get(i).getUsername());
                                     startActivity(intent);
                                 }
                                 else if (userList[0].get(i).getType().equals("Customer")) {
