@@ -15,9 +15,8 @@ public class Station {
         this._id = _id;
         this.stationName = stationName;
         this.stationArea = stationArea;
-        this.stationAddress = stationAddress;
-        this.owner = this.owner;
-        this.openClose = openClose;
+        this.owner = owner;
+
     }
 
     public Station(String stationName, String stationAddress, String stationArea, String owner, boolean openClose) {
@@ -63,6 +62,34 @@ public class Station {
 
     public ArrayList<fuelType> getFuelTypes() {
         return fuelTypes;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
+
+    public void setStationArea(String stationArea) {
+        this.stationArea = stationArea;
+    }
+
+    public void setStationAddress(String stationAddress) {
+        this.stationAddress = stationAddress;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public void setOpenClose(boolean openClose) {
+        this.openClose = openClose;
+    }
+
+    public void setFuelTypes(ArrayList<fuelType> fuelTypes) {
+        this.fuelTypes = fuelTypes;
     }
 
     public class fuelType{

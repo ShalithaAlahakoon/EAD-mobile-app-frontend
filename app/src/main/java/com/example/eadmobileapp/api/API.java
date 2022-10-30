@@ -11,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface API {
@@ -27,6 +28,11 @@ public interface API {
 
     @POST("stations")
     Call<Station> createStation(@Body Station station);
+
+    @PUT("api/stations/2")
+
+        // on below line we are creating a method to put our data.
+    Call<Station> updateData(@Body Station station);
 
 }
 
