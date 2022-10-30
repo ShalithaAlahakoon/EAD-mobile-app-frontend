@@ -1,10 +1,12 @@
 package com.example.eadmobileapp;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +15,8 @@ import com.example.eadmobileapp.api.API;
 import com.example.eadmobileapp.api.RetrofitClient;
 import com.example.eadmobileapp.models.Queue;
 import com.example.eadmobileapp.models.Station;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +25,9 @@ import retrofit2.Call;
 
 public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyViewHolder> {
     private ArrayList<Station> stationList;
-    private ArrayList<Queue> queue;
+    //get API interface
+    API api = RetrofitClient.getInstance().getApi();
+    private ArrayList<Queue> queueList;
 
     public recyclerAdapter(ArrayList<Station> stationList) {
         this.stationList = stationList;
@@ -54,6 +60,8 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
     public recyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item, parent, false);
+
+
         return new MyViewHolder(itemView);
     }
 
@@ -79,6 +87,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
             if (stationList.get(position).getFuelTypes().get(i).fuelType.equals("Super Diesel")) {
                 holder.superdiesel.setBackgroundColor(0xFF00FF00);
             }
+
         }
 
         holder.name.setText(name);
@@ -87,44 +96,42 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
         holder.owner.setText(owner);
         holder.openClose.setText(openClose);
 
-        //API interface
-        API api = RetrofitClient.getInstance().getApi();
-
-        //get station list
-        Call call = api.getQueue(name);
-        System.out.println("call recycler: " + call);
-
-        call.enqueue(new retrofit2.Callback() {
+        //get queue list
+        Call<List<Queue>> call = api.getQueues();
+        call.enqueue(new retrofit2.Callback<List<Queue>>() {
             @Override
-            public void onResponse(Call call, retrofit2.Response response) {
-                System.out.println("response recycler: " + response);
-                if (response.isSuccessful()) {
-                    queue = (ArrayList<Queue>) response.body();
-
-                    if(queue.get(0) == null){
-                            holder.txt_92octane_queue.setText("0");
-                            holder.txt_95octane_queue.setText("0");
-                            holder.txt_diesel_queue.setText("0");
-                            holder.txt_superdiesel_queue.setText("0");
-
-                } else {
-//                            holder.txt_92octane_queue.setText(String.valueOf(queue.get(0).getOctane92Queue()));
-//                            holder.txt_95octane_queue.setText(String.valueOf(queue.get(0).getOctane95Queue()));
-//                            holder.txt_diesel_queue.setText(String.valueOf(queue.get(0).getDieselQueue()));
-//                            holder.txt_superdiesel_queue.setText(String.valueOf(queue.get(0).getSuperDieselQueue()));
-                            holder.txt_92octane_queue.setText(String.valueOf(5));
-                            holder.txt_95octane_queue.setText(String.valueOf(0));
-                            holder.txt_diesel_queue.setText(String.valueOf(0));
-                            holder.txt_superdiesel_queue.setText(String.valueOf(0));
+            public void onResponse(Call<List<Queue>> call, retrofit2.Response<List<Queue>> response) {
+                queueList = (ArrayList<Queue>) response.body();
+                //        //get queues for each name
+                for (int i = 0; i < queueList.size(); i++) {
+                    if (queueList.get(i).getStationName().equals(name)) {
+                        System.out.println("queue stations station name = "+ queueList.get(i).getStationName());
+                        System.out.println("fuel type = "+ queueList.get(i).getFuel_type());
+                        if (queueList.get(i).getFuel_type().equals("92 octane")) {
+                            holder.txt_92octane_queue.setText(String.valueOf(queueList.get(i).getCount()));
                         }
+                        if (queueList.get(i).getFuel_type().equals("95 octane")) {
+                            holder.txt_95octane_queue.setText(String.valueOf(queueList.get(i).getCount()));
+                        }
+                        if (queueList.get(i).getFuel_type().equals("Diesel")) {
+                            holder.txt_diesel_queue.setText(String.valueOf(queueList.get(i).getCount()));
+                        }
+                        if (queueList.get(i).getFuel_type().equals("Super Diesel")) {
+                            holder.txt_superdiesel_queue.setText(String.valueOf(queueList.get(i).getCount()));
+                        }
+                    }
                 }
+
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
-                System.out.println("error recycler: " + t.getMessage());
+            public void onFailure(Call<List<Queue>> call, Throwable t) {
+                Log.d("Error",t.getMessage());
             }
         });
+
+
+
 
     }
 

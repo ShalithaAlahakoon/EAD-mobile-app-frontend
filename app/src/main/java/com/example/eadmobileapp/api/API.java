@@ -5,6 +5,7 @@ import com.example.eadmobileapp.models.Queue;
 import com.example.eadmobileapp.models.Station;
 import com.example.eadmobileapp.models.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,9 +23,6 @@ public interface API {
     @GET("users")
     Call<List<User>> getUsers();
 
-    @GET("queues/{station}")
-    Call <List<Queue>> getQueue(@Path("station") String station);
-
     @POST("users")
     Call<User> createUser(@Body User user);
     
@@ -39,9 +37,6 @@ public interface API {
 
     @POST("queues/exit")
     Call<Queue> exit(@Body Queue queue);
-
-    @POST("queues/name")
-    Call<Queue> getQueueByStationName(@Body Queue queue);
 
 }
 
