@@ -1,5 +1,6 @@
 package com.example.eadmobileapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,142 +24,116 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddFuels extends AppCompatActivity {
-    Button update;
+    Button next;
     Spinner station, type;
-
+    private ArrayList<Station> stationList;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_join_queue);
+        setContentView(R.layout.activity_addfuels);
 
-        update = findViewById(R.id.updateBtn);
+        next = findViewById(R.id.BtnNext);
         station = findViewById(R.id.spinner_station);
         type = findViewById(R.id.spinner_fuel_type);
 
 
+        //get extras
+        Intent intent1 = getIntent();
+        String owner_name = intent1.getStringExtra("owner_name");
+//        String owner_name = "owner";
         API api = RetrofitClient.getInstance().getApi();
-        //station list
-        final List<Station>[] stationList = new List[]{null};
-
         //get station list
         Call<List<Station>> call = api.getStations();
 
         call.enqueue(new Callback<List<Station>>() {
             @Override
             public void onResponse(Call<List<Station>> call, Response<List<Station>> response) {
-                stationList[0] = response.body();
+                //create filtered station array list
+                ArrayList<Station> filteredStations = new ArrayList<>();
+                if (response.isSuccessful()) {
+                    stationList = new ArrayList<>(response.body());
+                    for (int i = 0; i < stationList.size(); i++) {
+                        if (stationList.get(i).getOwner().equals(owner_name)) {
+                            System.out.println("owners station name = " + stationList.get(i).getStationName());
+                            filteredStations.add(stationList.get(i));
+                        } else {
+                            System.out.println("removed station name = " + stationList.get(i).getStationName());
+                            stationList.remove(i);
+                        }
+                    }
 
+                    //get station names into string array
+                    String[] stationNames = new String[filteredStations.size()];
+//                    stationNames[0] = "Select Station";
+                    for (int i = 0; i < filteredStations.size(); i++) {
+                        stationNames[i] = filteredStations.get(i).getStationName();
+                    }
 
-                //get station list length
-                int length = (int) stationList[0].size();
-                length = ++length;
+                    //set spinner
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(AddFuels.this, android.R.layout.simple_spinner_item, stationNames);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    station.setAdapter(adapter);
 
-                //get all station areas to array
-                String[] stationAreas = new String[length];
-                stationAreas[0] = "Select Area";
+                    //set spinner on item selected listener
+                    station.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            String SelectedStation = station.getSelectedItem().toString();
 
-                for (int i = 1; i < length; i++) {
-                    stationAreas[i] = stationList[0].get(i - 1).getStationArea();
-                }
+                            System.out.println("selected station = " + SelectedStation);
 
-                //convert array to array adapter
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddFuels.this, android.R.layout.simple_spinner_item, stationAreas);
-                //convert array adapter to array
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                station.setAdapter(adapter);
+                            Station selectedStation ;
 
-                //on select area get station name list
-                station.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            for (int j = 0; j < filteredStations.size(); j++) {
+                                if (filteredStations.get(j).getStationName().equals(SelectedStation)) {
+                                    selectedStation = filteredStations.get(j);
+                                    ArrayList<Station.fuelType> fuelTypes = selectedStation.getFuelTypes();
+                                    String[] fuelTypeNames = new String[fuelTypes.size()];
+                                    for (int k = 0; k < fuelTypes.size(); k++) {
+                                        fuelTypeNames[k] = fuelTypes.get(k).getFuelType();
+                                    }
 
-                        //set text view
-                        String selectedArea = parent.getItemAtPosition(position).toString();
+                                    //set spinner
+                                    ArrayAdapter<String> adapter = new ArrayAdapter<>(AddFuels.this, android.R.layout.simple_spinner_item, fuelTypeNames);
+                                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                    type.setAdapter(adapter);
 
+                                    //set spinner on item selected listener
+                                    type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                        @Override
+                                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                            String SelectedFuelType = type.getSelectedItem().toString();
+                                            System.out.println("selected fuel type = " + SelectedFuelType);
 
-                        //get station name list
-                        String[] stationNames = new String[stationList[0].size()+1];
-                        stationNames[0] = "Select Station";
-                        int j = 1;
-                        for (int i = 0; i < stationList[0].size(); i++) {
-                            if (stationList[0].get(i).getStationArea().equals(selectedArea)) {
-                                stationNames[j] = stationList[0].get(i).getStationName();
-                                j++;
+                                            next.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    Intent intent = new Intent(AddFuels.this, UpdateFuels.class);
+                                                    intent.putExtra("owner_name", owner_name);
+                                                    intent.putExtra("station_name", SelectedStation);
+                                                    intent.putExtra("fuel_type", SelectedFuelType);
+                                                    startActivity(intent);
+                                                }
+                                            });
+
+                                        }
+
+                                        @Override
+                                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                        }
+                                    });
+                                }
                             }
                         }
-                        //remove null values from array
-                        String[] stationNames2 = new String[j];
-                        for (int i = 0; i < j; i++) {
-                            stationNames2[i] = stationNames[i];
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
                         }
-
-                        if (stationNames2.length != 0) {
-
-                            //convert array to array adapter
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddFuels.this, android.R.layout.simple_spinner_item, stationNames2);
-                            //convert array adapter to array
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            type.setAdapter(adapter);
-
-
-                            //Get fuel
-                            type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                                    //set text view
-                                    String selectedStation = parent.getItemAtPosition(position).toString();
-
-
-                                    //get station name list
-                                    String[] fuelNames = new String[stationList[0].size()+1];
-
-                                    fuelNames[0] = "Select Fuel";
-
-                                    int j = 1;
-                                    for (int i = 0; i < stationList[0].size(); i++) {
-                                        if (stationList[0].get(i).getStationName().equals(selectedStation)) {
-
-                                            ArrayList<Station.fuelType> lst = stationList[0].get(i).getFuelTypes();
-
-                                            for (int c = 0; c < lst.size(); c++) {
-                                                fuelNames[j] = lst.get(c).fuelType;
-                                                j++;
-                                            }
-                                        }
-                                    }
-                                    //remove null values from array
-                                    String[] fuelNames2 = new String[j];
-
-                                    for (int i = 0; i < j; i++) {
-                                        fuelNames2[i] = fuelNames[i];
-                                    }
-
-
-                                    if (fuelNames2.length != 0) {
-                                        //convert array to array adapter
-                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddFuels.this, android.R.layout.simple_spinner_item, fuelNames2);
-                                        //convert array adapter to array
-                                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                        type.setAdapter(adapter);
-                                    }
-                                }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                }
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                    }
-                });
-
+                    });
+                }
             }
 
             @Override
@@ -166,25 +141,6 @@ public class AddFuels extends AppCompatActivity {
                 System.out.println("error = " + t.getMessage());
                 //print toast message
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String selectStation = station.getSelectedItem().toString();
-                String selectFuel = type.getSelectedItem().toString();
-
-                if (selectStation == "Select Station" || selectFuel == "Select Fuel") {
-                    Toast.makeText(AddFuels.this, "Please Select Values", Toast.LENGTH_SHORT).show();
-                } else {
-
-                    Intent intent = new Intent(view.getContext(), timer_screen.class);
-                    intent.putExtra("station", selectStation);
-                    intent.putExtra("fuel", selectFuel);
-                    startActivity(intent);
-                }
             }
         });
     }

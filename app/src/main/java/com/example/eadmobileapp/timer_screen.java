@@ -134,7 +134,7 @@ public class timer_screen extends AppCompatActivity {
     public void getDataSave(String area, String station, String fuel, String arrvie, String duration, Boolean fuelSt){
         try{
             RequestQueue queue = Volley.newRequestQueue(this);
-            String URL = "http://192.168.42.1:3000/filling/add";
+            String URL = "http://192.168.2.1/filling/add";
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("area",area);
             jsonObject.put("station",station);

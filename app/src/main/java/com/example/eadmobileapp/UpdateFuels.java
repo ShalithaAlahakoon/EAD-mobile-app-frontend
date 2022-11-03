@@ -1,123 +1,106 @@
 package com.example.eadmobileapp;
 
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.eadmobileapp.api.API;
+import com.example.eadmobileapp.api.RetrofitClient;
 import com.example.eadmobileapp.models.Station;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 
 public class UpdateFuels extends AppCompatActivity {
-
-    String url = "http://192.168.42.1:3000/stations";
 
     // creating our variables for our views such
     // as text view, button and progress
     // bar and response text view.
-    private EditText fuelTime, fuelLitres;
+    private EditText arrivalTime, fuelLitres;
     private Button updateBtn;
-    private ToggleButton finish;
+    private TextView stationName,fuelType;
+    private Switch fuelStatus;
 
+
+    //get API interface
+    API api = RetrofitClient.getInstance().getApi();
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_updatefuels);
 
         // initializing our views with their ids.
-        fuelTime = findViewById(R.id.etTime2);
+        arrivalTime = findViewById(R.id.editTextTime);
         fuelLitres = findViewById(R.id.etLitres2);
         updateBtn = findViewById(R.id.button);
-        finish = findViewById(R.id.toggleButton);
+        stationName = findViewById(R.id.txt_station_name);
+        fuelType = findViewById(R.id.txt_fuel_type);
+        fuelStatus = findViewById(R.id.switch1);
 
-        // adding on click listener for our button.
-        updateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // checking if the edit text is empty or not.
-                if (TextUtils.isEmpty(fuelTime.getText().toString()) && TextUtils.isEmpty(fuelLitres.getText().toString())) {
+        //get extras
+        Intent intent1 = getIntent();
+        String owner_name = intent1.getStringExtra("owner_name");
+        String station_name = intent1.getStringExtra("station_name");
+        String fuel_type = intent1.getStringExtra("fuel_type");
 
-                    // displaying a toast message if the edit text is empty.
-                    Toast.makeText(UpdateFuels.this, "Please enter your data..", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        //set text
+        stationName.setText(station_name);
+        fuelType.setText(fuel_type);
 
-                // calling a method to update data in our API.
-                callPUTDataMethod(fuelTime.getText().toString(), fuelLitres.getText().toString());
-            }
-        });
-    }
-
-    private void callPUTDataMethod(String nextArrival, String litres) {
+        updateBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
 
+                        String arrival_time = arrivalTime.getText().toString();
+                        String fuel_litres = fuelLitres.getText().toString();
+                        boolean fuel_status = fuelStatus.isChecked();
 
-        // on below line we are creating a retrofit
-        // builder and passing our base url
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
 
-                // as we are sending data in json format so
-                // we have to add Gson converter factory
-                .addConverterFactory(GsonConverterFactory.create())
 
-                // at last we are building our retrofit builder.
-                .build();
 
-        // below the line is to create an instance for our retrofit api class.
-        RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
 
-        // passing data from our text fields to our modal class.
-        Station station = new Station(nextArrival, litres);
 
-        // calling a method to create an update and passing our modal class.
-        Call<Station> call = retrofitAPI.updateData(station);
 
-        // on below line we are executing our method.
-        call.enqueue(new Callback<DataModal>() {
-            @Override
-            public void onResponse(Call<DataModal> call, Response<DataModal> response) {
-                // this method is called when we get response from our api.
-                Toast.makeText(MainActivity.this, "Data updated to API", Toast.LENGTH_SHORT).show();
+                        Station station = new Station(station_name,fuel_type, arrival_time, fuel_litres, fuel_status);
 
-                // on below line we are setting empty
-                // text to our both edit text.
-                jobEdt.setText("");
-                userNameEdt.setText("");
+                        Call<Station> call = api.updateStation(station);
 
-                // we are getting a response from our body and
-                // passing it to our modal class.
-                DataModal responseFromAPI = response.body();
+                        call.enqueue(
+                                new retrofit2.Callback<Station>() {
+                                    @Override
+                                    public void onResponse(Call<Station> call, retrofit2.Response<Station> response) {
+                                        if (response.isSuccessful()) {
+                                            Toast.makeText(UpdateFuels.this, "Station Updated", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(UpdateFuels.this, owner_dashboard.class);
+                                            intent.putExtra("owner_name", owner_name);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(UpdateFuels.this, "Station Not Updated", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
 
-                // on below line we are getting our data from modal class
-                // and adding it to our string.
-                String responseString = "Response Code : " + response.code() + "\nName : " + responseFromAPI.getName() + "\n" + "Job : " + responseFromAPI.getJob();
+                                    @Override
+                                    public void onFailure(Call<Station> call, Throwable t) {
+                                        Toast.makeText(UpdateFuels.this, "Station Not Updated", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                        );
 
-                // below line we are setting our string to our text view.
-                responseTV.setText(responseString);
-            }
+                    }
+                });
 
-            @Override
-            public void onFailure(Call<DataModal> call, Throwable t) {
-
-                // setting text to our text view when
-                // we get error response from API.
-                responseTV.setText("Error found is : " + t.getMessage());
-            }
-        });
     }
 }

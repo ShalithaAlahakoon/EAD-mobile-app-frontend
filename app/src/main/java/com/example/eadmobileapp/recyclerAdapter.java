@@ -75,16 +75,16 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
 
         //check if the station has fuel types
         for (int i = 0; i < stationList.get(position).getFuelTypes().size(); i++) {
-            if (stationList.get(position).getFuelTypes().get(i).fuelType.equals("92 octane")) {
+            if (stationList.get(position).getFuelTypes().get(i).fuelType.equals("92 Octane") && stationList.get(position).getFuelTypes().get(i).availability) {
                 holder.octane92.setBackgroundColor(0xFF00FF00);
             }
-            if (stationList.get(position).getFuelTypes().get(i).fuelType.equals("95 octane")) {
+            if (stationList.get(position).getFuelTypes().get(i).fuelType.equals("95 Octane") && stationList.get(position).getFuelTypes().get(i).availability) {
                 holder.octane95.setBackgroundColor(0xFF00FF00);
             }
-            if (stationList.get(position).getFuelTypes().get(i).fuelType.equals("Diesel")) {
+            if (stationList.get(position).getFuelTypes().get(i).fuelType.equals("Diesel") && stationList.get(position).getFuelTypes().get(i).availability) {
                 holder.diesel.setBackgroundColor(0xFF00FF00);
             }
-            if (stationList.get(position).getFuelTypes().get(i).fuelType.equals("Super Diesel")) {
+            if (stationList.get(position).getFuelTypes().get(i).fuelType.equals("Super Diesel")    && stationList.get(position).getFuelTypes().get(i).availability) {
                 holder.superdiesel.setBackgroundColor(0xFF00FF00);
             }
 
@@ -107,10 +107,10 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
                     if (queueList.get(i).getStationName().equals(name)) {
                         System.out.println("queue stations station name = "+ queueList.get(i).getStationName());
                         System.out.println("fuel type = "+ queueList.get(i).getFuel_type());
-                        if (queueList.get(i).getFuel_type().equals("92 octane")) {
+                        if (queueList.get(i).getFuel_type().equals("92 Octane")) {
                             holder.txt_92octane_queue.setText(String.valueOf(queueList.get(i).getCount()));
                         }
-                        if (queueList.get(i).getFuel_type().equals("95 octane")) {
+                        if (queueList.get(i).getFuel_type().equals("95 Octane")) {
                             holder.txt_95octane_queue.setText(String.valueOf(queueList.get(i).getCount()));
                         }
                         if (queueList.get(i).getFuel_type().equals("Diesel")) {

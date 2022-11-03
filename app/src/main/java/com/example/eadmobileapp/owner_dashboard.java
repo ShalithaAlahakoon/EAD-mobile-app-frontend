@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.eadmobileapp.databinding.ActivityUpdatefuelsBinding;
+
 public class owner_dashboard extends AppCompatActivity {
 
-    Button add_station,my_stations;
+    Button add_station,my_stations ,btn_update;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -19,6 +21,7 @@ public class owner_dashboard extends AppCompatActivity {
 
         add_station = findViewById(R.id.btn_add_stations);
         my_stations = findViewById(R.id.btn_my_stations);
+        btn_update = findViewById(R.id.btn_update);
 
         //get extras
         Intent intent1 = getIntent();
@@ -34,6 +37,13 @@ public class owner_dashboard extends AppCompatActivity {
         my_stations.setOnClickListener(v -> {
             //set intent to my stations activity
             Intent intent = new Intent(owner_dashboard.this, My_stations.class);
+            intent.putExtra("owner_name", owner_name);
+            startActivity(intent);
+        });
+
+        btn_update.setOnClickListener(v -> {
+            //set intent to update activity
+            Intent intent = new Intent(owner_dashboard.this, AddFuels.class);
             intent.putExtra("owner_name", owner_name);
             startActivity(intent);
         });

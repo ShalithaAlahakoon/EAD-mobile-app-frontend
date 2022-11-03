@@ -41,7 +41,7 @@ public class join_queue extends AppCompatActivity {
 
     private RequestQueue mRequestQueue;
     private StringRequest mStringRequest;
-    private String url = "http://192.168.42.1:3000/stations";
+    private String url = "https://ead-mobile-app.herokuapp.com/stations";
     private JSONArray jsonArray;
 
     //API interface
@@ -149,9 +149,10 @@ public class join_queue extends AppCompatActivity {
 
 
                                     //get station name list
-                                    String[] fuelNames = new String[stationList[0].size()+1];
+                                    String[] fuelNames = new String[5];
 
                                     fuelNames[0] = "Select Fuel";
+                                    System.out.println("stationList[0].size() = " + stationList[0].size());
 
                                     int j = 1;
                                     for (int i = 0; i < stationList[0].size(); i++) {

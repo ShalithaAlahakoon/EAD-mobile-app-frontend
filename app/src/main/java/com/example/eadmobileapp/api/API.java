@@ -38,10 +38,10 @@ public interface API {
 
     @POST("queues/exit")
     Call<Queue> exit(@Body Queue queue);
-    @PUT("api/stations/2")
 
+    @PUT("stations")
         // on below line we are creating a method to put our data.
-    Call<Station> updateData(@Body Station station);
+    Call<Station> updateStation(@Body Station station);
 
 }
 

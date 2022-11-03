@@ -80,7 +80,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/updateBtn"
+                    android:id="@+id/BtnNext"
                     android:layout_width="300dp"
                     android:layout_height="60dp"
                     android:text="Next"

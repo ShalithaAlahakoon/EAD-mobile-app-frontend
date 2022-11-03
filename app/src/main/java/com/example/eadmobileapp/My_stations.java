@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Response;
 
 public class My_stations extends AppCompatActivity {
     private ArrayList<Station> stationList;
@@ -34,71 +35,45 @@ public class My_stations extends AppCompatActivity {
         API api = RetrofitClient.getInstance().getApi();
         //station list
 
+        //get extras
+        Intent intent1 = getIntent();
+        String owner_name = intent1.getStringExtra("owner_name");
+
         //get station list
         call = api.getStations();
-        //set station list
+
+        //fill station list owner name
         call.enqueue(new retrofit2.Callback<List<Station>>() {
             @Override
-            public void onResponse(Call<List<Station>> call, retrofit2.Response<List<Station>> response) {
-                stationList = (ArrayList<Station>) response.body();
-                setStationInfo();
-                setAdapter();
+            public void onResponse(Call<List<Station>> call, Response<List<Station>> response) {
+                //create filtered station array list
+                ArrayList<Station> filteredStations = new ArrayList<>();
+                if (response.isSuccessful()) {
+                    stationList = new ArrayList<>(response.body());
+                    for (int i = 0; i < stationList.size(); i++) {
+                        if (stationList.get(i).getOwner().equals(owner_name)) {
+                            System.out.println("owners station name = " + stationList.get(i).getStationName());
+                            filteredStations.add(stationList.get(i));
+                        } else {
+                            System.out.println("removed station name = " + stationList.get(i).getStationName());
+                            stationList.remove(i);
+                        }
+                    }
+
+                    recyclerAdapter adapter = new recyclerAdapter(filteredStations);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                    recyclerView.setLayoutManager(layoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(adapter);
+
+                }
             }
 
             @Override
             public void onFailure(Call<List<Station>> call, Throwable t) {
-                System.out.println("t = " + t);
+                Toast.makeText(My_stations.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     };
-
-    private void setAdapter() {
-                recyclerAdapter adapter = new recyclerAdapter(stationList);
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-                recyclerView.setAdapter(adapter);
-            }
-            private void setStationInfo() {
-                //get data from intent
-
-                String [] selectedStations = new String[5];
-                //get extras
-                Intent intent3 = getIntent();
-                String owner_name = intent3.getStringExtra("owner_name");
-                selectedStations[0] = "fuel max";
-                //add item to selectedStations
-
-
-                //create temp list
-                ArrayList<Station> temp = new ArrayList<>();
-//        loop through the array and add to the list
-                for (int i = 0; i < selectedStations.length; i++) {
-                    Station station = getStationInfo(selectedStations[i]);
-                    if(station != null) {
-                        temp.add(new Station(station.getStationName(), station.getStationAddress(), station.getStationArea(),station.getOwner(),station.isOpenClose(),station.getFuelTypes()));
-                    }else{
-                        //toast
-                        Toast.makeText(getApplicationContext(),"station is null",Toast.LENGTH_LONG).show();
-                    }
-
-                }
-                stationList = temp;
-
-            }
-
-            private Station getStationInfo(String s) {
-                if (stationList != null) {
-                    for (int i = 0; i < stationList.size(); i++) {
-                        if (stationList.get(i).getStationName().equals(s)) {
-                            return stationList.get(i);
-                        }
-                    }
-                } else {
-                    //toast
-                    Toast.makeText(getApplicationContext(), "stationList is null", Toast.LENGTH_LONG).show();
-                }
-
-                return null;
-            }
     }

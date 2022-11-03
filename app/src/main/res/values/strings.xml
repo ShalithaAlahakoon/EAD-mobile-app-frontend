@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">EAD mobile app</string>
+    <string name="app_name">Fuel Max</string>
     <string name="title_activity_user_from_home_stations_list">user_from_home_stations_list</string>
+    <string name="add_now">Add Now</string>
+    <string name="add_station">Add station</string>
+    <string name="my_stations">My Stations</string>
+    <string name="update_details">Update details</string>
 
 </resources>
